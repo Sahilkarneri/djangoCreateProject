@@ -25,3 +25,35 @@ first create db tables if not migrated
 > enter username
 > enter email
 > enter password
+
+
+create models / table using django ORM
+from django.db import models
+from django.utils import timezone
+from django.contrib.auth.models import User
+
+# Create your models here.
+class Post(models.Model):
+    title = models.CharField(max_length=100)
+    content = models.TextField()
+    date_posted = models.DateTimeField(default=timezone.now)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+
+> python manage.py makemigrations
+> Migrations for 'blog':
+  blog\migrations\0001_initial.py
+    - Create model Post
+To look at the query
+> python manage.py sqlmigrate blog 0001
+BEGIN;
+--
+-- Create model Post
+--
+CREATE TABLE "blog_post" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "title" varchar(100) NOT NULL, "content" text NOT NULL, "date_posted" datetime NOT NULL, "author_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED);
+CREATE INDEX "blog_post_author_id_dd7a8485" ON "blog_post" ("author_id");
+COMMIT;
+> python manage.py migrate
+> Operations to perform:
+  Apply all migrations: admin, auth, blog, contenttypes, sessions
+Running migrations:
+  Applying blog.0001_initial... OK
