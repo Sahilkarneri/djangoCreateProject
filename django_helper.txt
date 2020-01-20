@@ -57,3 +57,14 @@ COMMIT;
   Apply all migrations: admin, auth, blog, contenttypes, sessions
 Running migrations:
   Applying blog.0001_initial... OK
+
+
+
+database shell for importing all db objects
+> python manage.py shell
+python interactive shell >
+>from blog.models import Post
+>from django.contrib.auth.models import User
+> User.objects.all()
+<QuerySet [<User: admin>]>
+>
