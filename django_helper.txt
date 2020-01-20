@@ -1,0 +1,19 @@
+django_project urls.py contains the routes for whole project
+
+For adding base html in html files use {% extends 'blog/base.html' %} where  {% extends 'appname_folder/htmlpage.html' %}
+
+For loading static files use ->
+{% load static %}
+<link rel="stylesheet" href="{% static 'blog/main.css' %}">
+
+
+For implementing routes in navigation links use ->
+<a href="{% url 'blog-home' %}">Home</a>
+where 'blog-home' is name given as parameter in urls.py 
+from django.urls import path
+from . import views
+urlpatterns = [
+    path('', views.home, name='blog-home'),
+    path('about/', views.about, name="blog-about"),
+]
+
