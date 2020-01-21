@@ -88,4 +88,13 @@ create post using python manage.py shell
 <QuerySet [<Post: Post object (1)>]>
 >>> Post.objects.all().first()
 <Post: Post object (1)>
-> 
+insert post based on user id
+> post3 = Post(title='Post title three', content='Content of post three', author_id=user.id)
+> post3.save()
+> to get posts made by the user
+schema user.modelname_set
+> user.post_set.all()
+>>> user.post_set.all()
+<QuerySet [<Post: Post title One>, <Post: post title two>, <Post: Post title Three>]>
+> user.post_set.create(title='Post four', content='Content of post four')
+<Post: Post four>
