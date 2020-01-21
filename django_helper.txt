@@ -67,4 +67,25 @@ python interactive shell >
 >from django.contrib.auth.models import User
 > User.objects.all()
 <QuerySet [<User: admin>]>
->
+> user = User.objects.filter(username="Eva").first()
+> user
+> <User:Eva>
+> user.id
+> 2
+> user.pk
+> 2
+> user.username
+> 'Eva'
+get user by id
+> user = User.objects.get(id=2)
+> user
+> <User:Eva>
+create post using python manage.py shell
+> post1 = Post(title="post title one", content="Content of post one", author=user)
+> to save the data to database user save() function
+> post1.save()
+> >>> Post.objects.all()
+<QuerySet [<Post: Post object (1)>]>
+>>> Post.objects.all().first()
+<Post: Post object (1)>
+> 
